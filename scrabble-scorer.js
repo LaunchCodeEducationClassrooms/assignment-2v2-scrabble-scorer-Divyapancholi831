@@ -40,11 +40,9 @@ let simpleScore=function(word)
 {
   word=word.toUpperCase();
   let letterPoints=0;
-  //let simpleScorelist='';
   for(i=0;i<word.length;i++)
   {
     letterPoints++;
-    //simpleScorelist+=`Point for '${word[i]}' : ${letterPoints++}\n`;
   }
   return letterPoints;
 }
@@ -64,7 +62,16 @@ let vowelBonusScore=function(word)
   return letterPoints;
 }
 
-let scrabbleScore;
+let scrabbleScore=function(word)
+{
+  word=word.toLowerCase();
+  let score=0;
+  for(let i=0;i<word.length;i++)
+  {
+    score+=newPointStructure[word[i]];
+  }
+  return score;
+};
 
 const scoringAlgorithms = [
   { name: "Simple Score",
@@ -77,16 +84,16 @@ const scoringAlgorithms = [
   },
   { name: "Scrabble",
     description: "The traditional scoring algorithm.",
-    scorerFunction: oldScrabbleScorer
+    scorerFunction: scrabbleScore
   }
 ];
 
-function scorerPrompt() {
+function scorerPrompt(word) {
   console.log(`Which scoring algorithm would you like to use?\n\n
   0 - ${scoringAlgorithms[0].name}: ${scoringAlgorithms[0].description}\n
   1 - ${scoringAlgorithms[1].name}: ${scoringAlgorithms[1].description}\n
   2 - ${scoringAlgorithms[2].name}: ${scoringAlgorithms[2].description}\n`);
-  let num= input.question("Enter 0, 1, or 2: ");
+  let num= Number(input.question("Enter 0, 1, or 2: "));
   if(num === 0)
   {
     return console.log(`Score for '${word}': ${scoringAlgorithms[0].scorerFunction(word)}`);
@@ -102,16 +109,31 @@ function scorerPrompt() {
   else{}
 }
 
-function transform() {};
+function transform(obj) {
+let newPointStrucObject={};
+for(item in obj)
+{
+  let newPoint=0;
+  while(newPoint<obj[item].length)
+  {
+    let newKey=obj[item][newPoint];
+    newKey=newKey.toLowerCase();
+    newPointStrucObject[`${newKey}`] = Number(item);
+    newPoint++;
+  }
+}
+return newPointStrucObject;
+};
 
-let newPointStructure;
+let newPointStructure=transform(oldPointStructure);
 
 function runProgram() {
    let word=initialPrompt();
-   //console.log(oldScrabbleScorer(word));
-   //console.log(simpleScore(word));
-   //console.log(vowelBonusScore(word));
-   console.log(scorerPrompt());
+  //console.log(oldScrabbleScorer(word));
+  //console.log(simpleScore(word));
+  //console.log(vowelBonusScore(word));
+  console.log(scorerPrompt(word));
+  //console.log(newPointStructure);
 }
 
 // Don't write any code below this line //
