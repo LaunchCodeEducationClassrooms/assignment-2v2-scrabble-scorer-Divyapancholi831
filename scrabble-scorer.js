@@ -90,19 +90,23 @@ const scoringAlgorithms = [
 
 function scorerPrompt(word) {
   console.log(`Which scoring algorithm would you like to use?\n\n
-  0 - ${scoringAlgorithms[0].name}: ${scoringAlgorithms[0].description}\n
-  1 - ${scoringAlgorithms[1].name}: ${scoringAlgorithms[1].description}\n
-  2 - ${scoringAlgorithms[2].name}: ${scoringAlgorithms[2].description}\n`);
-  let num= Number(input.question("Enter 0, 1, or 2: "));
-  if(num === 0)
+0 - ${scoringAlgorithms[0].name}: ${scoringAlgorithms[0].description}
+1 - ${scoringAlgorithms[1].name}: ${scoringAlgorithms[1].description}
+2 - ${scoringAlgorithms[2].name}: ${scoringAlgorithms[2].description}`);
+  let num= input.question("Enter 0, 1, or 2: ");
+  while(num !== '0' && num !== '1' && num !== '2')
+  {
+  num = input.question("invalid input, Enter 0, 1, or 2: ");
+  }
+  if(num === '0')
   {
     return console.log(`Score for '${word}': ${scoringAlgorithms[0].scorerFunction(word)}`);
   }
-  else if(num === 1)
+  else if(num === '1')
   {
     return console.log(`Score for '${word}': ${scoringAlgorithms[1].scorerFunction(word)}`);
   }
-  else if(num === 2)
+  else if(num === '2')
   {
     return console.log(`Score for '${word}': ${scoringAlgorithms[2].scorerFunction(word)}`);
   }
@@ -129,6 +133,13 @@ let newPointStructure=transform(oldPointStructure);
 
 function runProgram() {
    let word=initialPrompt();
+  /* let regularExp=/^[a-zA-Z]$/;
+   
+   while(word!==regularExp)
+   {
+     word=console.log("invalid input,", initialPrompt());
+   }
+   return word;*/
   //console.log(oldScrabbleScorer(word));
   //console.log(simpleScore(word));
   //console.log(vowelBonusScore(word));
