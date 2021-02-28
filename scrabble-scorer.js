@@ -32,8 +32,14 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
+  //let regExp=/^[a-zA-Z]$/;
    console.log("Let's play some scrabble! \n");
    return input.question("Enter a word to score:");
+   /*while(word!==regExp)
+   {
+     word=input.question("Enter a word to score:");
+   }
+   return word;*/
 };
 
 let simpleScore=function(word)
@@ -76,15 +82,15 @@ let scrabbleScore=function(word)
 const scoringAlgorithms = [
   { name: "Simple Score",
     description: "Each letter is worth 1 point",
-    scorerFunction: simpleScore
+    scoringFunction: simpleScore
   },
   { name: "Bonus Vowels",
     description: "Vowels are 3 pts, consonants are 1 pt.",
-    scorerFunction: vowelBonusScore
+    scoringFunction: vowelBonusScore
   },
   { name: "Scrabble",
     description: "The traditional scoring algorithm.",
-    scorerFunction: scrabbleScore
+    scoringFunction: scrabbleScore
   }
 ];
 
@@ -100,15 +106,15 @@ function scorerPrompt(word) {
   }
   if(num === '0')
   {
-    return console.log(`Score for '${word}': ${scoringAlgorithms[0].scorerFunction(word)}`);
+    return `Score for '${word}': ${scoringAlgorithms[0].scorerFunction(word)}`;
   }
   else if(num === '1')
   {
-    return console.log(`Score for '${word}': ${scoringAlgorithms[1].scorerFunction(word)}`);
+    return `Score for '${word}': ${scoringAlgorithms[1].scorerFunction(word)}`;
   }
   else if(num === '2')
   {
-    return console.log(`Score for '${word}': ${scoringAlgorithms[2].scorerFunction(word)}`);
+    return `Score for '${word}': ${scoringAlgorithms[2].scorerFunction(word)}`;
   }
   else{}
 }
