@@ -32,14 +32,8 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-  //let regExp=/^[a-zA-Z]$/;
    console.log("Let's play some scrabble! \n");
    return input.question("Enter a word to score:");
-   /*while(word!==regExp)
-   {
-     word=input.question("Enter a word to score:");
-   }
-   return word;*/
 };
 
 let simpleScore=function(word)
@@ -106,15 +100,15 @@ function scorerPrompt(word) {
   }
   if(num === '0')
   {
-    return `Score for '${word}': ${scoringAlgorithms[0].scorerFunction(word)}`;
+    return `Score for '${word}': ${scoringAlgorithms[0].scoringFunction(word)}`;
   }
   else if(num === '1')
   {
-    return `Score for '${word}': ${scoringAlgorithms[1].scorerFunction(word)}`;
+    return `Score for '${word}': ${scoringAlgorithms[1].scoringFunction(word)}`;
   }
   else if(num === '2')
   {
-    return `Score for '${word}': ${scoringAlgorithms[2].scorerFunction(word)}`;
+    return `Score for '${word}': ${scoringAlgorithms[2].scoringFunction(word)}`;
   }
   else{}
 }
@@ -136,21 +130,12 @@ return newPointStrucObject;
 };
 
 let newPointStructure=transform(oldPointStructure);
+newPointStructure[' ']=0;
 
 function runProgram() {
    let word=initialPrompt();
-  /* let regularExp=/^[a-zA-Z]$/;
-   
-   while(word!==regularExp)
-   {
-     word=console.log("invalid input,", initialPrompt());
-   }
-   return word;*/
-  //console.log(oldScrabbleScorer(word));
-  //console.log(simpleScore(word));
-  //console.log(vowelBonusScore(word));
   console.log(scorerPrompt(word));
-  //console.log(newPointStructure);
+  
 }
 
 // Don't write any code below this line //
